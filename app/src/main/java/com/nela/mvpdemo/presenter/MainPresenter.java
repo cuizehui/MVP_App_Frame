@@ -1,13 +1,28 @@
 package com.nela.mvpdemo.presenter;
 
 
+import com.nela.mvpdemo.base.BasePresenterContract;
 import com.nela.mvpdemo.contract.MainContract;
 
-public class MainPresenter implements MainContract.Presenter {
-    MainContract.View mView;
+public class MainPresenter extends BasePresenterContract<MainContract.View> implements MainContract.Presenter{
 
-    public MainPresenter(MainContract.View view){
-       mView =view;
+    public MainPresenter(MainContract.View view) {
+        super(view);
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 
 }

@@ -6,16 +6,16 @@ import android.os.PersistableBundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import butterknife.ButterKnife;
 
 
-public abstract class BaseActivity<T> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
 
-    @Nullable
     protected T mPresenter;
 
-    protected abstract void setPresenter(T presenter);
+    protected abstract T setPresenter();
 
     /**
      * 绑定布局文件
@@ -32,10 +32,37 @@ public abstract class BaseActivity<T> extends AppCompatActivity {
     protected abstract void initViews();
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(attachLayoutRes());
+        mPresenter = setPresenter();
         ButterKnife.bind(this);
         initViews();
+    }
+
+    /**
+     * 初始化 Toolbar
+     *
+     * @param toolbar
+     * @param homeAsUpEnabled
+     * @param title
+     */
+    protected void initToolBar(Toolbar toolbar, boolean homeAsUpEnabled, String title) {
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(homeAsUpEnabled);
+    }
+
+    protected void initToolBar(Toolbar toolbar, boolean homeAsUpEnabled, int resTitle) {
+        initToolBar(toolbar, homeAsUpEnabled, getString(resTitle));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+            mPresenter = null;
+        }
     }
 }

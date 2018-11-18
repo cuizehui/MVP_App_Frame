@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MvpDemo</string>
+    <string name="toolbar_main">MVP_Demo</string>
 </resources>
