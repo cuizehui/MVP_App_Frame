@@ -16,6 +16,20 @@ import android.view.WindowManager;
 
 public class ActivityTool {
 
+    public static void showFragmentToActivity(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, boolean show) {
+        if (fragment == null) {
+            return;
+        }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (show) {
+            transaction.show(fragment);
+        } else {
+            transaction.hide(fragment);
+        }
+        transaction.commit();
+    }
+
+
     /**
      * 加入 fragment
      *
