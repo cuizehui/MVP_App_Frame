@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.juphoon.cloud.jcsample.ui.ContactsFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="16dp"
+        app:queryHint="搜索" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_search"
+        tools:listitem="@layout/view_contact" />
+
+    <com.nela.mvpdemo.ui.view.LetterIndexView
+        android:id="@+id/view_letters"
+        android:layout_width="wrap_content"
+        android:layout_height="378dp"
+        android:layout_below="@id/sv_search"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/txt_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</RelativeLayout>

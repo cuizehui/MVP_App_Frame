@@ -1,4 +1,4 @@
-package com.nela.mvpdemo;
+package com.nela.mvpdemo.contract;
 
 
 import com.nela.mvpdemo.base.BasePresenter;

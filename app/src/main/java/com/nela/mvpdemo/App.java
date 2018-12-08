@@ -3,6 +3,8 @@ package com.nela.mvpdemo;
 import android.app.Application;
 import android.content.Context;
 
+import com.nela.mvpdemo.presenter.AppPresenter;
+
 public class App extends Application {
 
     public static Context sContext;

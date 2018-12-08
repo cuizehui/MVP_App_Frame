@@ -1,5 +1,6 @@
 package cn.nela.tools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,21 +15,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import static android.support.v4.util.Preconditions.checkNotNull;
+
 public class ActivityTool {
-
-    public static void showFragmentToActivity(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, boolean show) {
-        if (fragment == null) {
-            return;
-        }
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (show) {
-            transaction.show(fragment);
-        } else {
-            transaction.hide(fragment);
-        }
-        transaction.commit();
-    }
-
 
     /**
      * 加入 fragment
@@ -53,6 +42,51 @@ public class ActivityTool {
         transaction.replace(frameId, fragment);
         transaction.commit();
     }
+
+    @SuppressLint("RestrictedApi")
+    public static void removeFragmentFromActivity(@NonNull FragmentManager fragmentManager,
+                                                  @NonNull Fragment fragment) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.remove(fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void showFragmentInActivity(@NonNull FragmentManager fragmentManager,
+                                              @NonNull Fragment fragment) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.show(fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void hideFragmentFromActivity(@NonNull FragmentManager fragmentManager,
+                                                @NonNull Fragment fragment) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.hide(fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+
+    public static void showFragmentToActivity(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, boolean show) {
+        if (fragment == null) {
+            return;
+        }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (show) {
+            transaction.show(fragment);
+        } else {
+            transaction.hide(fragment);
+        }
+        transaction.commit();
+    }
+
 
     /**
      * 控制系统UI例如 Navigation Bar,Status Bar 显示

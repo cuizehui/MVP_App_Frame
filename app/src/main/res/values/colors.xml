@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorRed">#CD2920</color>
+    <color name="colorwhite">#FFFFFF</color>
+
+    <!--callLog-->
+    <color name="call_log_item_name_text_color">#282828</color>
+    <color name="call_log_item_name_missed_text_color">#EE524F</color>
+    <color name="call_log_item_time_text_color">@color/text_color_secondary</color>
+    <color name="text_color_secondary">#aaaaaa</color>
 </resources>

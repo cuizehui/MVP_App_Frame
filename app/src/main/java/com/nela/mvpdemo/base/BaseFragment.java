@@ -72,7 +72,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (mCallback != null) {
+        if (context instanceof BaseFragmentCallBack) {
             mCallback = (BaseFragmentCallBack) context;
         }
     }
