@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.juphoon.cloud.tool.test", appContext.getPackageName());
+        assertEquals("com.nelas.cloud.tool", appContext.getPackageName());
     }
 }
