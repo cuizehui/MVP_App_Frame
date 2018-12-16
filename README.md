@@ -5,6 +5,12 @@ Android MVP_Frame  Demo
 
 https://cuizehui.github.io/2018/12/01/responsive-android/
 
+## 项目结构介绍
+
+- app 通用mvp框架
+- tool 通用方法库
+- asyncTaskDemo(异步任务排队处理 demo)
+
 ## 用到的开源
 
 1. Eventbus
