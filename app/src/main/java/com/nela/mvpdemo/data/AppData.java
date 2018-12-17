@@ -3,6 +3,8 @@ package com.nela.mvpdemo.data;
 import android.content.Context;
 import android.os.Handler;
 
+import com.nela.mvpdemo.utils.CrashHandler;
+
 
 public class AppData {
 
@@ -15,6 +17,7 @@ public class AppData {
      * @param context
      */
     public static void init(Context context) {
+        CrashHandler.getInstance().initialize(context);
         sContext = context.getApplicationContext();
         sHandler = new Handler(sContext.getMainLooper());
     }

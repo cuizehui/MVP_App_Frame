@@ -7,6 +7,7 @@ import com.nela.mvpdemo.contract.AppContract;
 import com.nela.mvpdemo.data.AppData;
 import com.nela.mvpdemo.data.event.PermissionEvent;
 import com.nela.mvpdemo.utils.ContactsSync;
+import com.nela.mvpdemo.utils.CrashHandler;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,6 +26,7 @@ public class AppPresenter implements AppContract.Presenter {
 
     @Override
     public void start() {
+
         EventBus.getDefault().register(this);
         beginBusiness();
     }
