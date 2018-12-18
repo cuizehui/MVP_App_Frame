@@ -19,6 +19,7 @@ import cn.nela.tools.ContactTool;
 
 public class ContractsPresenter implements ContactsContract.Presenter {
 
+    private int mReplayType = 0;
     ContactsContract.View mView;
     private String mSearchKey;
     private ContactsSync.ContactsWrapper mContactsWrapper;
@@ -49,6 +50,16 @@ public class ContractsPresenter implements ContactsContract.Presenter {
             default:
                 break;
         }
+    }
+
+    @Override
+    public int getItemResponseType() {
+        return mReplayType;
+    }
+
+    @Override
+    public void setItemResponseType(int type) {
+        this.mReplayType = type;
     }
 
     @Override
@@ -118,6 +129,11 @@ public class ContractsPresenter implements ContactsContract.Presenter {
     @Override
     public void showContactsDetailsActivity(int position) {
         mView.startContactsDetailsActivity(getItemDraw(position).number);
+    }
+
+    @Override
+    public void showTextResponseUI(int uid) {
+        mView.showTextResponseUI(String.valueOf(uid));
     }
 
 

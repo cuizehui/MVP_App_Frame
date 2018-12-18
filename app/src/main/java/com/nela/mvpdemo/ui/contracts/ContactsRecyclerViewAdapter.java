@@ -28,7 +28,19 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_contact, parent, false);
+        if (viewType == 1) {
+            view.findViewById(R.id.message_text_response).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.message_voice_response).setVisibility(View.INVISIBLE);
+        } else {
+            view.findViewById(R.id.message_text_response).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.message_voice_response).setVisibility(View.VISIBLE);
+        }
         return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mPresenter.getItemResponseType();
     }
 
     @Override
@@ -40,7 +52,6 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             holder.mSection.setText(item.section);
             holder.mName.setText(item.name);
             holder.mNumber.setText(item.number);
-            holder.mCloud.setVisibility(item.showCloud ? View.VISIBLE : View.INVISIBLE);
             if (item.header != null) {
                 holder.mAvatarName.setVisibility(View.INVISIBLE);
 //                Glide.with(AppData.getContext())
@@ -75,12 +86,16 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         TextView mName;
         @BindView(R.id.txt_contact_item_number)
         TextView mNumber;
-        @BindView(R.id.img_cloud)
-        ImageView mCloud;
         @BindView(R.id.img_avatar)
         ImageView mAvatar;
         @BindView(R.id.txt_avatar_name)
         TextView mAvatarName;
+
+        @BindView(R.id.message_voice_response)
+        ImageView mVoiceResponse;
+        @BindView(R.id.message_text_response)
+        ImageView mTextResponse;
+
         private int position;
 
         public ViewHolder(View view) {
@@ -106,6 +121,11 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         @OnLongClick(R.id.view_contact_item)
         boolean onLongClickConferenceItem(View view) {
             return false;
+        }
+
+        @OnClick(R.id.message_text_response)
+        public void onMessageTextResponse() {
+            mPresenter.showTextResponseUI(position);
         }
     }
 }

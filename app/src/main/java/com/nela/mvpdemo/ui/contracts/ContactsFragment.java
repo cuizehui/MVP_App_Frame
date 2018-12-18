@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.nela.mvpdemo.R;
 import com.nela.mvpdemo.base.BaseFragment;
 import com.nela.mvpdemo.contract.contracts.ContactsContract;
@@ -19,6 +18,8 @@ import com.nela.mvpdemo.ui.view.LetterIndexView;
 import butterknife.BindView;
 
 public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> implements ContactsContract.View, LetterIndexView.OnTouchingLetterChangedListener {
+    public static final int REPLAY_TYPE_TEXT = 1;
+    public static final int REPLAY_TYPE_VOICE = 0;
 
     @BindView(R.id.list_contacts)
     RecyclerView mRecyclerView;
@@ -69,6 +70,16 @@ public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> i
     }
 
     @Override
+    public void onDataChange() {
+        if (mRecyclerView.getAdapter() != null) {
+            if (mRecyclerView.getAdapter().getItemCount() != 0) {
+                mRecyclerView.getAdapter().notifyDataSetChanged();
+            } else {
+            }
+        }
+    }
+
+    @Override
     public void onHit(String letter) {
         mLetter.setVisibility(View.VISIBLE);
         mLetter.setText(letter.toUpperCase());
@@ -114,7 +125,18 @@ public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> i
     }
 
     @Override
+    public void showTextResponseUI(String uid) {
+        Toast.makeText(mContext, "showTextResponseUI: " + uid, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
     public void showInfo(int info) {
 
+    }
+
+    public void changeMessageReplayType(int type) {
+        mPresenter.setItemResponseType(type);
+        onDataChange();
     }
 }

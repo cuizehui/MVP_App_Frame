@@ -1,4 +1,5 @@
 package com.nela.mvpdemo.contract.contracts;
+
 import com.nela.mvpdemo.base.BasePresenter;
 import com.nela.mvpdemo.base.BaseView;
 
@@ -11,6 +12,11 @@ public class ContactsContract {
 
         void showContactsList();
 
+        /**
+         * 数据改变
+         */
+        void onDataChange();
+
         /***
          *  掉起通话界面
          */
@@ -22,6 +28,8 @@ public class ContactsContract {
          * @param number
          */
         void startContactsDetailsActivity(String number);
+
+        void showTextResponseUI(String uid);
 
     }
 
@@ -46,6 +54,20 @@ public class ContactsContract {
          * @return
          */
         ItemDraw getItemDraw(int index);
+
+        /**
+         * 获取消息回复类型
+         *
+         * @return
+         */
+        int getItemResponseType();
+
+        /**
+         * 设置消息回复类型
+         *
+         * @param type
+         */
+        void setItemResponseType(int type);
 
         /**
          * 数据个数
@@ -101,6 +123,8 @@ public class ContactsContract {
          * @param position
          */
         void showContactsDetailsActivity(int position);
+
+        void showTextResponseUI(int uid);
 
         /**************************搜索*********************************/
 

@@ -10,6 +10,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.nela.mvpdemo.R;
 import com.nela.mvpdemo.base.BaseActivity;
@@ -26,7 +28,7 @@ public class HomeActivity extends BaseActivity<HomeContract.Present> implements 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView mBottomNavigation;
     @BindView(R.id.toolbar)
-    Toolbar mtoolbar;
+    Toolbar mToolbar;
 
     private ContactsFragment mContractsFragment;
 
@@ -59,7 +61,7 @@ public class HomeActivity extends BaseActivity<HomeContract.Present> implements 
     protected void initViews() {
         mBottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         mBottomNavigation.setOnNavigationItemReselectedListener(mOnNavigationItemReselectedListener);
-        initToolBar(mtoolbar, false, R.string.home_toolbar_main);
+        initToolBar(mToolbar, false, R.string.home_toolbar_main);
         mContractsFragment = ContactsFragment.newInstance();
         ActivityTool.addFragmentToActivity(getSupportFragmentManager(), mContractsFragment, R.id.fragment_content);
     }
@@ -73,6 +75,32 @@ public class HomeActivity extends BaseActivity<HomeContract.Present> implements 
     public void showMainFragment() {
         ActivityTool.hideFragmentFromActivity(getSupportFragmentManager(), mContractsFragment);
     }
+
+    private void initBaseToolbar() {
+        mToolbar.removeAllViews();
+        getLayoutInflater().inflate(R.layout.app_bar_main, mToolbar);
+    }
+
+    private void initContactsToolbar() {
+        mToolbar.removeAllViews();
+        getLayoutInflater().inflate(R.layout.app_bar_contracts, mToolbar, true);
+
+        final Button replayType = findViewById(R.id.message_replay_type);
+
+        replayType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (replayType.isSelected()) {
+                    replayType.setSelected(false);
+                    mContractsFragment.changeMessageReplayType(ContactsFragment.REPLAY_TYPE_VOICE);
+                } else {
+                    replayType.setSelected(true);
+                    mContractsFragment.changeMessageReplayType(ContactsFragment.REPLAY_TYPE_TEXT);
+                }
+            }
+        });
+    }
+
 
     @Override
     public void showContactsFragment() {
@@ -99,11 +127,13 @@ public class HomeActivity extends BaseActivity<HomeContract.Present> implements 
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_main:
-                    initToolBar(mtoolbar, false, R.string.home_toolbar_main);
+                    initBaseToolbar();
+                    initToolBar(mToolbar, false, R.string.home_toolbar_main);
                     showMainFragment();
                     break;
                 case R.id.navigation_contact:
-                    initToolBar(mtoolbar, false, R.string.home_toolbar_contact);
+                    initContactsToolbar();
+                    initToolBar(mToolbar, false, R.string.home_toolbar_contact);
                     showContactsFragment();
                     break;
 

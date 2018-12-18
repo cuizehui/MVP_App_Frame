@@ -50,7 +50,6 @@ public class ContactsSearchRecyclerViewAdapter extends RecyclerView.Adapter<Cont
             SpannableString number = text2HighFont(item.number, item.searchKey);
             viewHolder.mName.setText(item.name);
             viewHolder.mNumber.setText(number);
-            viewHolder.mCloud.setVisibility(item.showCloud ? View.VISIBLE : View.INVISIBLE);
             if (item.header != null) {
                 viewHolder.mAvatarName.setVisibility(View.INVISIBLE);
 //                Glide.with(AppData.getContext())
@@ -85,8 +84,7 @@ public class ContactsSearchRecyclerViewAdapter extends RecyclerView.Adapter<Cont
         TextView mName;
         @BindView(R.id.txt_contact_item_number)
         TextView mNumber;
-        @BindView(R.id.img_cloud)
-        ImageView mCloud;
+
         @BindView(R.id.img_avatar)
         ImageView mAvatar;
         @BindView(R.id.txt_avatar_name)

@@ -5,10 +5,13 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorRed">#CD2920</color>
     <color name="colorwhite">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="darkBrown">#bf231916</color>
 
-    <!--callLog-->
+    <!--contracts-->
     <color name="call_log_item_name_text_color">#282828</color>
     <color name="call_log_item_name_missed_text_color">#EE524F</color>
     <color name="call_log_item_time_text_color">@color/text_color_secondary</color>
     <color name="text_color_secondary">#aaaaaa</color>
+    <color name="translucent_gray">#9B9B9B</color>
 </resources>
