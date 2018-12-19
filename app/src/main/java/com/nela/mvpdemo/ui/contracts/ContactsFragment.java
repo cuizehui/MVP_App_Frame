@@ -20,6 +20,7 @@ import butterknife.BindView;
 public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> implements ContactsContract.View, LetterIndexView.OnTouchingLetterChangedListener {
     public static final int REPLAY_TYPE_TEXT = 1;
     public static final int REPLAY_TYPE_VOICE = 0;
+    private int mCurrentReplayType = REPLAY_TYPE_VOICE;
 
     @BindView(R.id.list_contacts)
     RecyclerView mRecyclerView;
@@ -50,6 +51,7 @@ public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> i
     @Override
     protected void initViews() {
         mPresenter.start();
+        mPresenter.setItemReplayType(mCurrentReplayType);
         mSearchView.onActionViewExpanded();
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -135,8 +137,14 @@ public class ContactsFragment extends BaseFragment<ContactsContract.Presenter> i
 
     }
 
-    public void changeMessageReplayType(int type) {
-        mPresenter.setItemResponseType(type);
+    public void changeMessageReplayType() {
+        if (mCurrentReplayType == REPLAY_TYPE_VOICE) {
+            mCurrentReplayType = REPLAY_TYPE_TEXT;
+            mPresenter.setItemReplayType(REPLAY_TYPE_TEXT);
+        } else {
+            mCurrentReplayType = REPLAY_TYPE_VOICE;
+            mPresenter.setItemReplayType(REPLAY_TYPE_VOICE);
+        }
         onDataChange();
     }
 }

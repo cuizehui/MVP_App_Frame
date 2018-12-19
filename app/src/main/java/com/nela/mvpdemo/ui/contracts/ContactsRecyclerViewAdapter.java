@@ -28,7 +28,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_contact, parent, false);
-        if (viewType == 1) {
+        if (viewType == ContactsFragment.REPLAY_TYPE_TEXT) {
             view.findViewById(R.id.message_text_response).setVisibility(View.VISIBLE);
             view.findViewById(R.id.message_voice_response).setVisibility(View.INVISIBLE);
         } else {
@@ -40,7 +40,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
     @Override
     public int getItemViewType(int position) {
-        return mPresenter.getItemResponseType();
+        return mPresenter.getItemReplayType();
     }
 
     @Override

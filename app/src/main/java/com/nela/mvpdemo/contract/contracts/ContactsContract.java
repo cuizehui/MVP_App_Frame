@@ -60,14 +60,14 @@ public class ContactsContract {
          *
          * @return
          */
-        int getItemResponseType();
+        int getItemReplayType();
 
         /**
          * 设置消息回复类型
          *
          * @param type
          */
-        void setItemResponseType(int type);
+        void setItemReplayType(int type);
 
         /**
          * 数据个数

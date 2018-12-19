@@ -92,11 +92,10 @@ public class HomeActivity extends BaseActivity<HomeContract.Present> implements 
             public void onClick(View v) {
                 if (replayType.isSelected()) {
                     replayType.setSelected(false);
-                    mContractsFragment.changeMessageReplayType(ContactsFragment.REPLAY_TYPE_VOICE);
                 } else {
                     replayType.setSelected(true);
-                    mContractsFragment.changeMessageReplayType(ContactsFragment.REPLAY_TYPE_TEXT);
                 }
+                mContractsFragment.changeMessageReplayType();
             }
         });
     }

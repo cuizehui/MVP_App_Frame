@@ -3,7 +3,7 @@ package com.nela.mvpdemo.data.event;
 import android.support.annotation.IntDef;
 
 
-import com.nela.mvpdemo.data.search.SearchAsyncTask;
+import com.nela.mvpdemo.data.search.ContactsSearchManager;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -28,7 +28,7 @@ public class SearchEvent {
     @EventType
     public int type;
 
-    SearchAsyncTask.SearchContactsWrapper mSearchContactsWrapper;
+    ContactsSearchManager.SearchAsyncTask.SearchContactsWrapper mSearchContactsWrapper;
 
     /**
      * 构造函数
@@ -36,12 +36,12 @@ public class SearchEvent {
      * @param type                  事件
      * @param searchContactsWrapper
      */
-    public SearchEvent(@EventType int type, SearchAsyncTask.SearchContactsWrapper searchContactsWrapper) {
+    public SearchEvent(@EventType int type, ContactsSearchManager.SearchAsyncTask.SearchContactsWrapper searchContactsWrapper) {
         this.type = type;
         this.mSearchContactsWrapper = searchContactsWrapper;
     }
 
-    public SearchAsyncTask.SearchContactsWrapper getSearchContactsWrapper() {
+    public ContactsSearchManager.SearchAsyncTask.SearchContactsWrapper getSearchContactsWrapper() {
         return mSearchContactsWrapper;
     }
 }

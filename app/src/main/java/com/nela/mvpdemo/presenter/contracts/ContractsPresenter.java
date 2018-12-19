@@ -5,8 +5,7 @@ import android.text.TextUtils;
 import com.nela.mvpdemo.contract.contracts.ContactsContract;
 import com.nela.mvpdemo.data.event.ContactEvent;
 import com.nela.mvpdemo.data.event.SearchEvent;
-import com.nela.mvpdemo.data.search.SearchAsycTaskManager;
-import com.nela.mvpdemo.data.search.SearchAsyncTask;
+import com.nela.mvpdemo.data.search.ContactsSearchManager;
 import com.nela.mvpdemo.utils.ContactsSync;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,11 +18,11 @@ import cn.nela.tools.ContactTool;
 
 public class ContractsPresenter implements ContactsContract.Presenter {
 
-    private int mReplayType = 0;
+    private int mReplayType;
     ContactsContract.View mView;
     private String mSearchKey;
     private ContactsSync.ContactsWrapper mContactsWrapper;
-    private SearchAsyncTask.SearchContactsWrapper mSearchContactsWrapper;
+    private ContactsSearchManager.SearchAsyncTask.SearchContactsWrapper mSearchContactsWrapper;
 
     public ContractsPresenter(ContactsContract.View view) {
         super();
@@ -53,12 +52,12 @@ public class ContractsPresenter implements ContactsContract.Presenter {
     }
 
     @Override
-    public int getItemResponseType() {
+    public int getItemReplayType() {
         return mReplayType;
     }
 
     @Override
-    public void setItemResponseType(int type) {
+    public void setItemReplayType(int type) {
         this.mReplayType = type;
     }
 
@@ -162,14 +161,14 @@ public class ContractsPresenter implements ContactsContract.Presenter {
             return;
         }
         mSearchKey = searchKey;
-        SearchAsycTaskManager.getInstance().startSearch(searchKey, mContactsWrapper, SearchEvent.EVENT_SEARCH_ADDRESS_BOOK_CONTACTS);
+        ContactsSearchManager.getInstance().startSearch(searchKey, mContactsWrapper, SearchEvent.EVENT_SEARCH_ADDRESS_BOOK_CONTACTS);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSearchEvent(SearchEvent event) {
         switch (event.type) {
             case SearchEvent.EVENT_SEARCH_ADDRESS_BOOK_CONTACTS:
-                SearchAsyncTask.SearchContactsWrapper wrapper = event.getSearchContactsWrapper();
+                ContactsSearchManager.SearchAsyncTask.SearchContactsWrapper wrapper = event.getSearchContactsWrapper();
                 if (wrapper != null) {
                     if (TextUtils.equals(mSearchKey, wrapper.searchKey)) {
                         mSearchContactsWrapper = wrapper;
